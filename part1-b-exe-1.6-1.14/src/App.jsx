@@ -38,7 +38,7 @@ const App = () => {
       <br />
       average {average}
       <br />
-      positive {positive}
+      positive {positive}%
     </div>
   );
 };
