@@ -11,6 +11,10 @@ const App = () => {
   const average = all > 0 ? (good - bad) / all : 0;
   console.log(`Average score is ${average}`);
 
+  // calculating on the percentage of positive feedback
+  const positive = all > 0 ? (good / all) * 100 : 0;
+  console.log(`percentage of positive feedback ${positive}`);
+
   // create handlers for buttons clicked
   const handleClickedGood = () => setGood(good + 1);
   const handleClickedNeutral = () => setNeutral(neutral + 1);
@@ -33,6 +37,8 @@ const App = () => {
       all {all}
       <br />
       average {average}
+      <br />
+      positive {positive}
     </div>
   );
 };
