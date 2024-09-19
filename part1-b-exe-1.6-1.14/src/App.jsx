@@ -57,6 +57,34 @@ const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
+  // 1.12*: anecdotes step 1
+  // Expand the application by adding a button that can be clicked
+  // to display a random anecdote from the field of software engineering
+  const anecdotes = [
+    "If it hurts, do it more often.",
+    "Adding manpower to a late software project makes it later!",
+    "The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.",
+    "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+    "Premature optimization is the root of all evil.",
+    "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
+    "Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.",
+    "The only way to go fast, is to go well.",
+  ];
+  const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0));
+
+  // diplay random anecdote
+  const randomAnecdotes = () => {
+    const randomIndex = Math.floor(Math.random() * anecdotes.length);
+    setSelected(randomIndex);
+  };
+
+  // Expand your application so that you can vote for the displayed anecdote
+  const voteAnecdote = () => {
+    const newVotes = [...votes];
+    newVotes[selected] += 1;
+    setVotes(newVotes);
+  };
   // lets calculate the score averagely (good + neutral + bad) divide by 3
   const all = good + neutral + bad;
   console.log(`Total score is ${all}`);
@@ -82,7 +110,6 @@ const App = () => {
       <Button handleClick={() => setGood(good + 1)} text="good" />
       <Button handleClick={() => setNeutral(neutral + 1)} text="neutral" />
       <Button handleClick={() => setBad(bad + 1)} text="bad" />
-
       {/* bjects are not valid as a React child */}
       <h2>Statistics</h2>
       <Statistics
@@ -93,6 +120,13 @@ const App = () => {
         average={average}
         positive={positive}
       />
+      <h2>anecdotes</h2>
+      {anecdotes[selected]}
+      <br />
+      <button onClick={voteAnecdote}>vote</button>
+      <button onClick={randomAnecdotes}>next Anecdote</button>
+      <br />
+      has {votes[selected]} votes
     </div>
   );
 };
