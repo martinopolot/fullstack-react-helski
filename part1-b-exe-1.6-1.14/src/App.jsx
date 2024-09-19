@@ -85,6 +85,10 @@ const App = () => {
     newVotes[selected] += 1;
     setVotes(newVotes);
   };
+
+  //  Anecdotes with the largest number of votes
+  const mostVotes = votes.indexOf(Math.max(...votes));
+
   // lets calculate the score averagely (good + neutral + bad) divide by 3
   const all = good + neutral + bad;
   console.log(`Total score is ${all}`);
@@ -120,13 +124,23 @@ const App = () => {
         average={average}
         positive={positive}
       />
-      <h2>anecdotes</h2>
+      <h2>Anecdotes of the day</h2>
       {anecdotes[selected]}
+      <br />
+      has {votes[selected]} votes
       <br />
       <button onClick={voteAnecdote}>vote</button>
       <button onClick={randomAnecdotes}>next Anecdote</button>
-      <br />
-      has {votes[selected]} votes
+      <h2>Anecdotes with most votes</h2>
+      {votes[mostVotes] > 0 ? (
+        <div>
+          {anecdotes[mostVotes]}
+          <br />
+          has {votes[mostVotes]} votes
+        </div>
+      ) : (
+        <p></p>
+      )}
     </div>
   );
 };
